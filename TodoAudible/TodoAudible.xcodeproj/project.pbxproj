@@ -15,6 +15,7 @@
 		7819338A1CC69BDF005F47A1 /* TodoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781933891CC69BDF005F47A1 /* TodoItemCell.swift */; };
 		7819338C1CC6A235005F47A1 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7819338B1CC6A235005F47A1 /* TodoItem.swift */; };
 		7819338E1CC6AD53005F47A1 /* CreateControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7819338D1CC6AD53005F47A1 /* CreateControllerViewController.swift */; };
+		781933921CC6D28A005F47A1 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781933911CC6D28A005F47A1 /* DetailsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		781933891CC69BDF005F47A1 /* TodoItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemCell.swift; sourceTree = "<group>"; };
 		7819338B1CC6A235005F47A1 /* TodoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 		7819338D1CC6AD53005F47A1 /* CreateControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateControllerViewController.swift; sourceTree = "<group>"; };
+		781933911CC6D28A005F47A1 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				781933891CC69BDF005F47A1 /* TodoItemCell.swift */,
 				7819338B1CC6A235005F47A1 /* TodoItem.swift */,
 				7819338D1CC6AD53005F47A1 /* CreateControllerViewController.swift */,
+				781933911CC6D28A005F47A1 /* DetailsTableViewController.swift */,
 			);
 			path = TodoAudible;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				7819338A1CC69BDF005F47A1 /* TodoItemCell.swift in Sources */,
 				7819338C1CC6A235005F47A1 /* TodoItem.swift in Sources */,
 				7819338E1CC6AD53005F47A1 /* CreateControllerViewController.swift in Sources */,
+				781933921CC6D28A005F47A1 /* DetailsTableViewController.swift in Sources */,
 				781933881CC69923005F47A1 /* ListControllerTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

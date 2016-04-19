@@ -12,6 +12,8 @@ class ListControllerTableViewController: UITableViewController {
     
     // The list of todo items
     var todos = [TodoItem]()
+    
+    var counter = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,12 @@ class ListControllerTableViewController: UITableViewController {
         let todoItems = self.loadTodos()
         if (todoItems != nil) {
             self.todos = todoItems!
+            
+            // Load the counter as well
+            let loadedCounter = self.loadCounter()
+            if (loadedCounter != nil) {
+                self.counter = loadedCounter!
+            }
         }
     }
 
@@ -50,55 +58,70 @@ class ListControllerTableViewController: UITableViewController {
         return cell
     }
     
+    // For creation
     @IBAction func unwindToList(segue: UIStoryboardSegue) {
+        // Update the counter
+        self.counter += 1
+        
         // Trigger a save of all of the todo items
+        self.saveData()
+    }
+    
+    // For deletion or edits
+    @IBAction func unwindFromDetails(segue: UIStoryboardSegue) {
+        self.tableView.reloadData()
+        self.saveData()
+    }
+    
+    func saveData() {
+        // Save the todos
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.todos, toFile: TodoItem.ArchiveURL.path!)
         if (!isSuccessfulSave) {
             print("Unable to save todo items")
         } else {
             print("Sucessful Save")
         }
+        
+        // Save the current index
+        let isSuccessfulCounterSave = NSKeyedArchiver.archiveRootObject(self.counter, toFile: TodoItem.CounterURL.path!)
+        if (!isSuccessfulCounterSave) {
+            print("Unable to save counter")
+        } else {
+            print("Sucessful Save")
+        }
+    }
+    
+    // Grabs a todo item based on *its* index
+    func getIndexedItem(index: Int) -> Int {
+        for (var i = 0, length = self.todos.count; i < length; i += 1) {
+            if (self.todos[i].index == index) {
+                return i
+            }
+        }
+        
+        return -1
     }
     
     func loadTodos() -> [TodoItem]? {
         return NSKeyedUnarchiver.unarchiveObjectWithFile(TodoItem.ArchiveURL.path!) as? [TodoItem]
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func loadCounter() -> Int? {
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(TodoItem.CounterURL.path!) as? Int
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier! == "DetailsSegue") {
+            // We know that it's a details controller as the dest
+            let destController = segue.destinationViewController as! DetailsTableViewController
+            let selectedCell = sender as! TodoItemCell
+            let indexPath = tableView.indexPathForCell(selectedCell)!
+            let todoItem = self.todos[indexPath.row]
+            
+            destController.todo = todoItem
+        }
     }
-    */
 
 }

@@ -25,11 +25,13 @@ class CreateControllerViewController: UIViewController {
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Create the todo item
         let todoItem = self.createItem()
         let destController = segue.destinationViewController as! ListControllerTableViewController
+        
+        // Set the index on the item so that the correct one gets updated later
+        todoItem.index = destController.counter + 1
         
         destController.todos.append(todoItem)
         destController.tableView.reloadData()

@@ -14,6 +14,9 @@ class TodoItem: NSObject, NSCoding {
     struct PropertyKey {
         static let nameKey = "name"
         static let indexKey = "index"
+        
+        // For the counter
+        static let counterKey = "counter"
     }
     
     var name: String
@@ -45,4 +48,5 @@ class TodoItem: NSObject, NSCoding {
     // MARK: Archiving Paths
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("todos")
+    static let CounterURL = DocumentsDirectory.URLByAppendingPathComponent("counter")
 }
