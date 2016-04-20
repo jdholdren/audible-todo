@@ -121,6 +121,10 @@ class ListControllerTableViewController: UITableViewController {
             let todoItem = self.todos[indexPath.row]
             
             destController.todo = todoItem
+        } else {
+            // It's the create controller
+            let destController = segue.destinationViewController as! CreateControllerViewController
+            destController.nextIndex = self.counter + 1
         }
     }
 

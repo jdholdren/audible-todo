@@ -14,6 +14,7 @@ class TodoItem: NSObject, NSCoding {
     struct PropertyKey {
         static let nameKey = "name"
         static let indexKey = "index"
+        static let recordingKey = "recording"
         
         // For the counter
         static let counterKey = "counter"
@@ -21,10 +22,12 @@ class TodoItem: NSObject, NSCoding {
     
     var name: String
     var index: Int
+    var recording: NSURL?
     
-    init(name: String, index: Int) {
+    init(name: String, index: Int, recording: NSURL?) {
         self.index = index
         self.name = name
+        self.recording = recording
         
         // Call the super's initializer
         super.init()
@@ -35,14 +38,16 @@ class TodoItem: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.name, forKey: PropertyKey.nameKey)
         aCoder.encodeObject(self.index, forKey: PropertyKey.indexKey)
+        aCoder.encodeObject(self.recording, forKey: PropertyKey.recordingKey)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
         let name = aDecoder.decodeObjectForKey(PropertyKey.nameKey) as! String
         let index = aDecoder.decodeObjectForKey(PropertyKey.indexKey) as! Int
+        let recording = aDecoder.decodeObjectForKey(PropertyKey.recordingKey) as? NSURL
         
         // Call initializer
-        self.init(name: name, index: index)
+        self.init(name: name, index: index, recording: recording)
     }
     
     // MARK: Archiving Paths
